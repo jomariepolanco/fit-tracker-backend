@@ -4,7 +4,6 @@ class CreateWorkouts < ActiveRecord::Migration[6.0]
       t.string :title
       t.string :category
       t.string :description
-      t.string :exercises
 
       t.timestamps
     end
