@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_211703) do
+ActiveRecord::Schema.define(version: 2020_12_12_211330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "days", force: :cascade do |t|
-    t.string "day"
-    t.integer "number"
-    t.integer "week_id"
+  create_table "appointments", force: :cascade do |t|
+    t.date "date"
+    t.time "time"
+    t.integer "workout_id"
+    t.integer "user_id"
+    t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -26,81 +28,43 @@ ActiveRecord::Schema.define(version: 2020_12_10_211703) do
   create_table "exercise_workouts", force: :cascade do |t|
     t.integer "workout_id"
     t.integer "exercise_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "exercises", force: :cascade do |t|
-    t.string "name"
     t.integer "reps"
     t.integer "sets"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "goals", force: :cascade do |t|
-    t.integer "sleep"
-    t.string "nutrition"
-    t.integer "hydration"
-    t.integer "steps"
-    t.string "intentions"
-    t.string "reflections"
-    t.integer "day_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "meal_days", force: :cascade do |t|
-    t.integer "meal_id"
-    t.integer "day_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "meals", force: :cascade do |t|
+  create_table "exercises", force: :cascade do |t|
     t.string "name"
-    t.integer "calories"
-    t.integer "protein"
-    t.integer "fat"
-    t.integer "carbs"
-    t.integer "fiber"
-    t.string "ingredients"
-    t.string "flavor_boosters"
-    t.text "recipe"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "trackings", force: :cascade do |t|
+  create_table "stats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "exercise_id"
     t.integer "weight"
-    t.integer "chest"
-    t.integer "hips"
-    t.integer "thigh"
-    t.integer "waist"
-    t.integer "arm"
-    t.integer "week_id"
+    t.string "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "weeks", force: :cascade do |t|
-    t.string "month"
-    t.integer "number"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "workout_days", force: :cascade do |t|
-    t.integer "workout_id"
-    t.integer "day_id"
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password"
+    t.string "name"
+    t.integer "age"
+    t.integer "weight"
+    t.integer "height"
+    t.string "photo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "workouts", force: :cascade do |t|
-    t.string "title"
-    t.string "category"
-    t.string "description"
+    t.string "kind"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

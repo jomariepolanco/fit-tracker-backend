@@ -8,91 +8,23 @@
 require 'rest-client' 
 require 'json'
 
-puts "Destroying Week"
-Week.destroy_all
-puts "Destroying Tracking"
-Tracking.destroy_all
-puts "Destroying Day"
-Day.destroy_all
-puts "Destroying Goal"
-Goal.destroy_all
-puts "Destroying Meal"
-Meal.destroy_all
-puts "Destroying MealDay"
-MealDay.destroy_all
-puts "Destroying Workout"
+User.destroy_all
+puts "Destroying Users"
+Exercise.destroy_all
+puts "Destroying Exercises"
 Workout.destroy_all
-puts "Destroying WorkoutDay"
-WorkoutDay.destroy_all
+puts "Destroying Workouts"
+Stat.destroy_all
+puts "Destroying Stats"
+Appointment.destroy_all
+puts "Destroying Appointments"
+ExerciseWorkout.destroy_all
+puts "Destroying Joins"
 
-puts "Creating Weeks"
-Week.create!(month: "December", number: 1)
-Week.create!(month: "December", number: 2)
-Week.create!(month: "December", number: 3)
-Week.create!(month: "December", number: 4)
-Week.create!(month: "January", number: 5)
-Week.create!(month: "January", number: 6)
-Week.create!(month: "January", number: 7)
-Week.create!(month: "January", number: 8)
 
-puts "Creating Trackings"
-Tracking.create!(weight: 190, chest: 36, hips: 46, thigh: 25, waist: 30, arm: 14, week_id: Week.first.id)
-
-puts "Creating Days"
-Day.create!(day: "Monday", number: 7, week_id: Week.first.id)
-Day.create!(day: "Tuesday", number: 8, week_id: Week.first.id)
-Day.create!(day: "Wednesday", number: 9, week_id: Week.first.id)
-Day.create!(day: "Thursday", number: 10, week_id: Week.first.id)
-Day.create!(day: "Friday", number: 11, week_id: Week.first.id)
-Day.create!(day: "Saturday", number: 12, week_id: Week.first.id)
-Day.create!(day: "Sunday", number: 13, week_id: Week.first.id)
-
-puts "Creating Goals"
-Goal.create!(sleep: 8, nutrition: "1800 calories", hydration: 2500, steps: 10000, intentions: "workout for the first time in a month today! baby steps", reflections: "working out was good, the eating not so much", day_id: Day.first.id)
-Goal.create!(sleep: 8, nutrition: "1800 calories", hydration: 2500, steps: 10000, intentions: "4 workouts this week", reflections: "working out was good, the eating not so much", day_id: Day.second.id)
-Goal.create!(sleep: 8, nutrition: "1800 calories", hydration: 2500, steps: 10000, intentions: "so sore...but i'm gonna fit another in", reflections: "working out was good, the eating not so much", day_id: Day.third.id)
-Goal.create!(sleep: 8, nutrition: "1800 calories", hydration: 2500, steps: 10000, intentions: "rest day", reflections: "working out was good, the eating not so much", day_id: Day.fourth.id)
-Goal.create!(sleep: 8, nutrition: "1800 calories", hydration: 2500, steps: 10000, intentions: "why is diet so hard?!", reflections: "working out was good, the eating not so much", day_id: Day.fifth.id)
-Goal.create!(sleep: 8, nutrition: "1800 calories", hydration: 2500, steps: 10000, intentions: "grocery shop and meal prep today", reflections: "working out was good, the eating not so much", day_id: Day.all.sample.id)
-Goal.create!(sleep: 8, nutrition: "1800 calories", hydration: 2500, steps: 10000, intentions: "meal prep", reflections: "working out was good, the eating not so much", day_id: Day.all.sample.id)
-
-puts "Creating Meals"
-Meal.create!(name: "French Toast", calories: 514, protein: 31, fat: 21, carbs: 51, fiber: 8, ingredients: "bread, egg whites, milk, maple syrub, almond butter", flavor_boosters: "cinnamon", recipe: "Soak bread in eggs and milk. Cook in a pan on medium-heat. 2 minutes each side. Top with almond butter and syrup.")
-Meal.create!(name: "Grilled Chicken Sweet Potato Salad", calories: 456, protein: 47, fat: 18, carbs: 25, fiber: 7, ingredients: "chicken breast, sweet potato, spring salad mix, oil, avocado", flavor_boosters: "balsamic vinegar", recipe: "Roast the sweet potatoes in the oven. Bake the chicken breast. Mix all ingredients in a bowl.")
-Meal.create!(name: "Turkey Stir-Fry", calories: 495, protein: 49, fat: 22, carbs: 25, fiber: 3, ingredients: "rice, ground turkey, sesame oil, bell peppers, peanuts", flavor_boosters: "all the spices!", recipe: "Marinate turkey in spices and cook over medium heat. Add in bell peppers. Serve over rice.")
-Meal.create!(name: "Yogurt Parfait", calories: 307, protein: 23, fat: 13, carbs: 25, fiber: 4, ingredients: "greek yogurt, dark chocolate, raspberries", flavor_boosters: "sugar free maple syrup", recipe: "add all ingredients in a bowl!")
-
-puts "Creating MealDay"
-MealDay.create!(meal_id: Meal.first.id, day_id: Day.first.id)
-MealDay.create!(meal_id: Meal.first.id, day_id: Day.second.id)
-MealDay.create!(meal_id: Meal.first.id, day_id: Day.third.id)
-MealDay.create!(meal_id: Meal.first.id, day_id: Day.fourth.id)
-MealDay.create!(meal_id: Meal.first.id, day_id: Day.fifth.id)
-# MealDay.create!(meal_id: Meal.first.id, day_id: Day.sixth.id)
-# MealDay.create!(meal_id: Meal.first.id, day_id: Day.seventh.id)
-MealDay.create!(meal_id: Meal.second.id, day_id: Day.first.id)
-MealDay.create!(meal_id: Meal.second.id, day_id: Day.second.id)
-MealDay.create!(meal_id: Meal.second.id, day_id: Day.third.id)
-MealDay.create!(meal_id: Meal.second.id, day_id: Day.fourth.id)
-MealDay.create!(meal_id: Meal.second.id, day_id: Day.fifth.id)
-# MealDay.create!(meal_id: Meal.second.id, day_id: Day.sixth.id)
-# MealDay.create!(meal_id: Meal.second.id, day_id: Day.seventh.id)
-MealDay.create!(meal_id: Meal.third.id, day_id: Day.first.id)
-MealDay.create!(meal_id: Meal.third.id, day_id: Day.second.id)
-MealDay.create!(meal_id: Meal.third.id, day_id: Day.third.id)
-MealDay.create!(meal_id: Meal.third.id, day_id: Day.fourth.id)
-MealDay.create!(meal_id: Meal.third.id, day_id: Day.fifth.id)
-# MealDay.create!(meal_id: Meal.third.id, day_id: Day.sixth.id)
-# MealDay.create!(meal_id: Meal.third.id, day_id: Day.seventh.id)
-MealDay.create!(meal_id: Meal.fourth.id, day_id: Day.first.id)
-MealDay.create!(meal_id: Meal.fourth.id, day_id: Day.second.id)
-MealDay.create!(meal_id: Meal.fourth.id, day_id: Day.third.id)
-MealDay.create!(meal_id: Meal.fourth.id, day_id: Day.fourth.id)
-MealDay.create!(meal_id: Meal.fourth.id, day_id: Day.fifth.id)
-# MealDay.create!(meal_id: Meal.fourth.id, day_id: Day.sixth.id)
-# MealDay.create!(meal_id: Meal.fourth.id, day_id: Day.seventh.id)
-
-puts "Creating Exercises"
+User.create!(name: "Mary Rachael Koenke", age: 35, weight: 125, height: 64, username: "mkoenke", password: "mkoenke")
+User.create!(name: "Jomarie Polanco", age: 27, weight: 145, height: 70, username: "joey",  password: "12345")
+puts "Users seeded"
 
 api_response = RestClient.get("https://wger.de/api/v2/exercise/?language=2")
 api_data = JSON.parse(api_response)
@@ -100,42 +32,108 @@ api_data = JSON.parse(api_response)
 api_data['results'].each do |exercise|
     Exercise.create!(
         name: exercise['name'],
-        reps: 12,
-        sets: 3
+        description: exercise['description']
     )
 end
+puts "Exercises Seeded"
 
-puts "Creating Workouts"
+Workout.create!( kind: "Killer Leg Workout", user_id: User.all.sample.id)
+Workout.create!(kind: "Olympic Wightlifting Progression 1", user_id: User.all.sample.id)
+Workout.create!(kind: "Olympic Weightlifting Progression 2", user_id: User.all.sample.id)
+Workout.create!(kind: "Death By Squats", user_id: User.all.sample.id)
+Workout.create!(kind: "Assessory Day", user_id: User.all.sample.id)
 
-Workout.create!(title: "LNDM LB", category: "activation", description: "follow the exercises")
-Workout.create!(title: "LNDM UB", category: "main", description: "follow the exercises")
-Workout.create!(title: "LNDM GLUTES", category: "finisher", description: "follow the exercises")
-Workout.create!(title: "LNDM LISS", category: "activation", description: "follow the exercises")
-Workout.create!(title: "LNDM HIIT", category: "main", description: "follow the exercises")
-Workout.create!(title: "LNDM BACK", category: "finisher", description: "follow the exercises")
-Workout.create!(title: "LNDM ARMS", category: "activation", description: "follow the exercises")
-Workout.create!(title: "LNDM LEGS", category: "main", description: "follow the exercises")
+# jo's workouts
+Workout.create!(kind: "Beginner Leg Workout", user_id: User.all.sample.id)
+Workout.create!(kind: "Rower's Back Workout", user_id: User.all.sample.id)
+Workout.create!(kind: "Full Body Blaster", user_id: User.all.sample.id)
+Workout.create!(kind: "Arms Arms Arms", user_id: User.all.sample.id)
+Workout.create!(kind: "Abs for Days", user_id: User.all.sample.id)
 
-puts "Creating WorkoutDays"
+puts "Workouts seeded"
 
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
-WorkoutDay.create!(workout_id: Workout.all.sample.id, day_id: Day.all.sample.id)
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id , weight: 185, comment: "PR Clean and Jerk! Yay!")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 275, comment: "Feeling strong!")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 275, comment: "My legs hurt!!")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 235, comment: "I grinded through it, but I did it!")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 195, comment: "Gotta catch my jerk up to this weight!")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 145, comment: "Finally!!!!")
 
-puts "Creating ExerciseWorkouts"
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 185, comment: "Feels good to be back in the gym!")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 190, comment: "Tough, but I feel amazing.")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 150, comment: "🍑🍑🍑🍑🍑🍑🍑🍑🍑🍑")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 65, comment: "My arms are jelly")
+Stat.create!(user_id: User.all.sample.id, exercise_id: Exercise.all.sample.id, weight: 225, comment: "My favorite!")
+puts "Stats seeded"
 
-20.times do 
-    ExerciseWorkout.create!(workout_id: Workout.all.sample.id , exercise_id: Exercise.all.sample.id)
-end
+Appointment.create!(date: Date.new(2020, 11, 8), time: Time.now, workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "Garage" )
+Appointment.create!(date: Date.new(2020, 11, 9), time: Time.now, workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "Mid City Gym" )
+Appointment.create!(date: Date.new(2020, 11, 10), time: Time.now, workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "Garage" )
+Appointment.create!(date: Date.new(2020, 11, 13), time: Time.now, workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "Mid City Gym" )
+Appointment.create!(date: Date.new(2020, 11, 15), time: Time.now, workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "Garage" )
+
+
+#jo's appointments
+Appointment.create!(date: Date.new(2020, 11, 16), time: Time.new(2020, 11, 15, 6, 0, 0), workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "Home Gym")
+Appointment.create!(date: Date.new(2020, 11, 17), time: Time.new(2020, 11, 15, 6, 0, 0), workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "F45")
+Appointment.create!(date: Date.new(2020, 11, 18), time: Time.new(2020, 11, 15, 7, 0, 0), workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "Home Gym")
+Appointment.create!(date: Date.new(2020, 11, 19), time: Time.new(2020, 11, 15, 13, 0, 0), workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "F45")
+Appointment.create!(date: Date.new(2020, 11, 20), time: Time.new(2020, 11, 15, 18, 0, 0), workout_id: Workout.all.sample.id, user_id: User.all.sample.id, location: "F45")
+
+puts "Appointments seeded"
+
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id , exercise_id: Exercise.all.sample.id, sets: 3 , reps: 10)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id , exercise_id: Exercise.all.sample.id, sets: 5 , reps: 10)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id , exercise_id: Exercise.all.sample.id, sets: 3 , reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id , exercise_id: Exercise.all.sample.id, sets: 4 , reps: 15)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id , exercise_id: Exercise.all.sample.id, sets: 3 , reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 8 , reps: 1)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3 , reps: 3)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 5)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 2)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 5)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 8 , reps: 1)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 3)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 2)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 4 , reps: 2)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 5)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3 , reps: 10)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 3)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3 , reps: 10)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 5)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3 , reps: 10)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3 , reps: 10)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3 , reps: 10)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3 , reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 5 , reps: 5)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3 , reps: 10)
+
+#jo's exerciseworkouts
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 20)
+
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 15)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 20)
+
+
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 20)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 12)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 15)
+ExerciseWorkout.create!(workout_id: Workout.all.sample.id, exercise_id: Exercise.all.sample.id, sets: 3, reps: 15)
+puts "ExerciseWorkout seeded"
+
+
