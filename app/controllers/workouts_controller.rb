@@ -5,7 +5,7 @@ class WorkoutsController < ApplicationController
   def index
     @workouts = Workout.all
 
-    render json: @workouts
+    render json: @workouts, include: :exercises
   end
 
   # GET /workouts/1
